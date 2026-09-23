@@ -1,0 +1,10 @@
+# Direct dependencies only (the old repo pinned a full `pip freeze`).
+streamlit
+streamlit-option-menu
+matplotlib
+seaborn
+numpy
+# Local development: editable sibling checkout.
+# For deployment, replace with a pinned tag, e.g.
+#   pricing-core @ git+https://github.com/divvijchandna/pricing-core@vX.Y.Z
+-e ../pricing-core
