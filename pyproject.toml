@@ -1,0 +1,21 @@
+# Tool configuration only. This app is not an installable package: run it with
+# `streamlit run app.py`; dependencies live in requirements.txt.
+
+# --- ruff -----------------------------------------------------------------
+[tool.ruff]
+line-length = 88
+target-version = "py311"
+
+[tool.ruff.lint]
+# Same rule set as pricing-core. pep8-naming (N) deliberately off: finance
+# notation (S, K, T, r, q, sigma).
+select = ["E", "W", "F", "I", "B", "UP", "NPY"]
+
+# --- pytest ---------------------------------------------------------------
+[tool.pytest.ini_options]
+minversion = "8.0"
+testpaths = ["tests"]
+pythonpath = ["."]  # so tests can `import grids` from the repo root
+addopts = ["-ra", "--strict-markers", "--strict-config"]
+# Any warning (e.g. numpy divide-by-zero) fails the test, as in pricing-core.
+filterwarnings = ["error"]
