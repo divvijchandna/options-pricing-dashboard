@@ -4,8 +4,6 @@ Streamlit dashboard for Black-Scholes-Merton option prices, Greeks and heatmaps.
 All pricing comes from [pricing-core](https://github.com/divvijchandna/pricing-core);
 this repo contains no pricing formulas of its own.
 
-Successor to [Black-Scholes-v1.0](https://github.com/divvijchandna/Black-Scholes-v1.0).
-
 ## Pages
 
 - **Calculator**: spot, strike, time to expiry, volatility, risk-free rate and
@@ -40,19 +38,10 @@ ruff format --check .
 The computations live in `grids.py` (pure functions, no Streamlit) so they can be
 tested; `app.py` is UI only.
 
-## What changed from Black-Scholes-v1.0
+## Origin
 
-- **No local formula.** Prices and Greeks come from pricing-core, which is tested
-  against put-call parity, no-arbitrage bounds, its limits, finite differences and
-  textbook values.
-- **Vectorised heatmaps.** Each heatmap is one broadcast call over the spot x vol
-  grid instead of a Python double loop: 117x faster at 11 x 11 and 701x at
-  101 x 101, with identical values.
-- **Dividend yield q** added as an input.
-- **Greek heatmaps** (delta, gamma, vega) and a Greeks table added.
-- **Edge cases handled.** An audit of the old formula found it returned NaN at
-  the forward when time or volatility is zero, and divided by zero at every such
-  limit; pricing-core returns the correct limit there, and NaN only for invalid
-  inputs.
-- Navigation uses Streamlit's built-in `st.navigation`; `requirements.txt` lists
-  direct dependencies only, as UTF-8 (the old file was a UTF-16 `pip freeze`).
+Rebuilt from my earlier
+[Black-Scholes-v1.0](https://github.com/divvijchandna/Black-Scholes-v1.0) on
+pricing-core: each heatmap is now one vectorised call over the spot x vol grid
+(117x faster at 11 x 11, 701x at 101 x 101, identical values), with dividend yield
+and Greeks added.
